@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html>
+
+<style>
+/*body {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 30px;
+  margin-right:30px;
+}*/
+a {text-decoration : none; color : #003399;}
+a:hover {text-decoration:underline; color: #8C1515; }
+.content {
+  max-width: 1000px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<style>
+.disabled{
+    pointer-events: none;
+    color:black;
+}
+
+</style>
+
+<script>
+function copy(dest, source) {
+  if(dest.source == source) {
+    dest.innerHTML = "";
+    dest.source = null;
+  }
+  else {
+    dest.innerHTML = source.innerHTML;
+    dest.source = source;
+  }
+  dest.blur();
+}
+</script>
+
+<head>
+    <title>Hui's Misc</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Hui Liu">
+    <meta name="keywords" content="Hui Liu">
+    <meta name="robots" content="index,follow">
+    <meta name="description" content="Homepage of Hui Liu.">
+</head>
+
+<body style="width:80%;" class="content">
+
+<p>
+  In my spare time, I enjoy photography. <br>
+  I am a enthusiastic pursuer of the night sky and the starts. <br>
+  Here are some of my favorite photos.</td>
+</p>
+<table>
+  <tr>
+    <td>
+      <img src="photo/milkyway1.jpg" width="300"><br>
+      <p>Milky Way in California near the Pacific Ocean - 2018.09</p>
+    </td>
+    <td>
+      <img src="photo/milkyway2.jpg" width="300"><br>
+      <p>Milky Way in California near the Pacific Ocean - 2018.08</p>
+    </td>
+    <td>
+      <img src="photo/photo1.jpg" width="300"><br>
+      <p>Skyline in Kingston - 2020.01</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="photo/photo2.jpg" width="450"><br>
+      <p>US Capitol in Washington DC- 2019.12</p>
+    </td>
+    <td>
+      <img src="photo/photo3.jpg" width="450"><br>
+      <p>Cloud Gate in the Millenium Park of Chicago - 2019.05</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="photo/photo4.jpg" width="450"><br>
+      <p>Spring in Ann Arbor - 2019.03</p>
+    </td>
+    <td>
+      <img src="photo/photo5.jpg" width="450"><br>
+      <p>View at 360 Chicago Observation Deck - 2019.05</p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

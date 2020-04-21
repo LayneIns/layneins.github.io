@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html>
+
+<style>
+/*body {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 30px;
+  margin-right:30px;
+}*/
+a {text-decoration : none; color : #003399;}
+a:hover {text-decoration:underline; color: #8C1515; }
+.content {
+  max-width: 800px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<style>
+.disabled{
+    pointer-events: none;
+    color:black;
+}
+
+</style>
+
+<script>
+function copy(dest, source) {
+  if(dest.source == source) {
+    dest.innerHTML = "";
+    dest.source = null;
+  }
+  else {
+    dest.innerHTML = source.innerHTML;
+    dest.source = source;
+  }
+  dest.blur();
+}
+</script>
+
+<head>
+    <title>Hui's Homepage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Hui Liu">
+    <meta name="keywords" content="Hui Liu">
+    <meta name="robots" content="index,follow">
+    <meta name="description" content="Homepage of Hui Liu.">
+</head>
+
+<body style="width:80%;" class="content">
+
+<table cellpadding="20" style="font-size: 17px">
+<tr>
+<td><a href="photo/photo.jpg"><img src='photo/photo.jpg' alt="Hui Liu"/, height = 250></a></td>
+<td>
+<h1> Hui Liu <span style="font-family:STFangsong; font-size:18pt"> (刘晖)</span> </h1>
+<!-- <font size="+1"><b>Ph.D. Candidate </b> in <b>Computer Science</b> <br><b>XXXX University</b> <br> <br> -->
+<b>Email</b>: <a href="mailto:&#104;&#117;&#105;&#46;&#108;&#105;&#117;&#64;&#113;&#117;&#101;&#101;&#110;&#115;&#117;&#46;&#99;&#97;"><tt>&#104;&#117;&#105;&#46;&#108;&#105;&#117;&#64;&#113;&#117;&#101;&#101;&#110;&#115;&#117;&#46;&#99;&#97;</tt></a> <br>
+<!-- <b>Office</b>: XXXX</font> <br> -->
+<br>
+<!-- <a href = "#education">[Education]</a>  -->
+<a href = "#publications">[Publications]</a>
+<a href = "#experience">[Experience]</a>
+<a href="#misc">[Misc.]</a> <br> <br>
+<a href="files/CV.pdf">[CV]</a>
+<a href="https://scholar.google.com/citations?user=brfcskMAAAAJ">[Google Scholar]</a>
+<a href="https://www.linkedin.com/in/hui-liu-702990155/">[LinkedIn]</a>
+<a href="https://github.com/LayneIns">[GitHub]</a>
+<!-- <a href="personalstatement/ps.mp4">[A vedio of personal statement]</a> -->
+</td>
+<!-- <td><img src='', height = 100></td> -->
+</tr>
+</table>
+
+
+<a name = "about" class="disabled"><h2> About Me </h2></a>
+<p>
+  Hi! My name is Hui Liu. <br>
+  I am currently a first-year PhD student in the <a href="https://www.ece.queensu.ca">Department of Electrical and Computer Engineering</a> at <a href="https://www.queensu.ca">Queen's University</a>. My advisor is <a href="http://www.xiaodanzhu.com">Prof. Xiaodan Zhu</a>. <br>
+  Before coming to Queen's, I received my bachelor's degree from <a href = "http://eecs.pku.edu.cn/">School of Electronics Engineering and Computer Science </a> at <a href = "http://www.pku.edu.cn"> Peking University</a> in 2018. <br>
+</p>
+My main research interests include natural language processing, text mining and machine learning.
+<br><br>
+      
+<a name = "news" class="disabled"><h2> News </h2></a>
+<p>
+  <div style="height:180px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    <ul>
+      <li><span style="color: blue">[2020.04]</span> Our paper “End-to-End Transition-Based Online Dialogue Disentanglement” accepted to IJCAI 2020</li>
+      <li><span style="color: blue">[2020.03]</span> This summer, I will join the Search Science and AI group at amazon as an applied science intern</li>
+      <li><span style="color: blue">[2019.09]</span> Start as a PhD student at Queen’s University</li>
+      <li><span style="color: blue">[2019.07]</span> Start my research internship at <a href="https://www.iflytek.com/index.html">iFLYTEK</a> research group</li>
+      <li><span style="color: blue">[2019.05]</span> Our paper “Towards Explainable NLP: A Generative Explanation Framework for Text Classification” accepted to ACL 2019</li>
+      <!-- <li><span style="color: blue">[2018.11]</span> I will be a research assistant at the <a href="https://lit.eecs.umich.edu/">Language and Information Technologies (LIT) Group</a>, University of Michigan, Ann Arbor (with <a href="https://web.eecs.umich.edu/~mihalcea/">Prof. Rada Mihalcea</a>)</li>
+      <li><span style="color: blue">[2018.07]</span> Start my summer internship as a research assistant at the <a href="http://nlp.cs.ucsb.edu/">NLP Group</a>, University of California, Santa Barbara (with <a href="https://sites.cs.ucsb.edu/~william/">Prof. William Wang</a>)</li>
+      <li><span style="color: blue">[2018.06]</span> Graduate from Peking University. See you PKU!</li> -->
+    </ul>
+  </div>
+</p>
+<br>
+
+
+<!-- <b> <font color="red">I am now actively applying for Ph.D. programs.</font></b><br> -->
+
+<!-- <br>
+<a name = "education" class="disabled"><h2> Education </h2></a>
+<ul>
+  <li> <b>PhD Candidate</b> <br> 2019.09 - present: Queen's University </li>
+  <li> <b>Bachelor's Degree</b> <br> 2014.09 - 2018.07: Peking University </li>
+</ul>
+ -->
+<a name = "publications" class="disabled"><h2> Publications & Manuscripts </h2></a>
+<!-- (<sup>*</sup>: equal contribution) -->
+<ul>
+  <li> <b><a href="#">End-to-End Transition-Based Online Dialogue Disentanglement</a></b><br> <b>Hui Liu</b>, Zhan Shi, Jia-chen Gu, Quan Liu, Si Wei, Xiaodan Zhu<br> IJCAI 2020, long paper. 
+ </li>
+  <div id="bib2" style="display:none">
+  <blockquote>
+  <pre>
+  
+  </pre>
+  </blockquote>
+  </div>
+  <font size="-1">
+    [<a href="javascript:copy(div2, bib2)">bib</a>] 
+    [<a href="#">paper</a>] 
+    [<a href="https://github.com/LayneIns/End-to-End-Transition-Based-Online-Dialogue-Disentanglement/blob/master/README.md">Code</a>]
+  </font>
+  <div id="div2"></div>
+  <br>
+
+  <li> <b><a href="https://www.aclweb.org/anthology/P19-1560.pdf">Towards Explainable NLP: A Generative Explanation Framework for Text Classification</a></b><br> <b>Hui Liu</b>, Qingyu Yin, William Yang Wang <br> ACL 2019, long paper. 
+ </li>
+  <div id="bib1" style="display:none">
+  <blockquote>
+  <pre>
+  @inproceedings{liu-etal-2019-towards-explainable,
+    title = {Towards Explainable NLP: A Generative Explanation Framework for Text Classification},
+    author ={Liu, Hui  and Yin, Qingyu  and Wang, William Yang},
+    booktitle = {Proceedings of the 57th Conference of the Association for Computational Linguistics},
+    month = jul,
+    year = {2019},
+    address = {Florence, Italy},
+    publisher = {Association for Computational Linguistics},
+    url = {https://www.aclweb.org/anthology/P19-1560},
+    pages = {5570--5581},
+  }
+  </pre>
+  </blockquote>
+  </div>
+  <font size="-1">
+    [<a href="javascript:copy(div1, bib1)">bib</a>] 
+    [<a href="https://www.aclweb.org/anthology/P19-1560.pdf">paper</a>] 
+    [<a href="https://github.com/LayneIns/Generative-Explanation-Framework-for-Text-Classification">Code</a>]</font>
+  <div id="div1"></div>
+  <br>
+
+  <li> <b><a href="https://dl.acm.org/citation.cfm?id=3183370">QuoteRec: Toward Quote Recommendation for Writing</a></b><br> Jiwei Tan, Xiaojun Wan, <b>Hui Liu</b>, Jianguo Xiao <br> ACM Transactions on Information Systems (TOIS) </li>
+  <div id="bib0" style="display:none">
+  <blockquote>
+  <pre>
+  @article{Tan:2018:QTQ:3146384.3183370,
+    author = {Tan, Jiwei and Wan, Xiaojun and Liu, Hui and Xiao, Jianguo},
+    title = {QuoteRec: Toward Quote Recommendation for Writing},
+    journal = {ACM Trans. Inf. Syst.},
+    issue_date = {April 2018},
+    volume = {36},
+    number = {3},
+    month = mar,
+    year = {2018},
+    issn = {1046-8188},
+    pages = {34:1--34:36},
+    articleno = {34},
+    numpages = {36},
+    url = {http://doi.acm.org/10.1145/3183370},
+    doi = {10.1145/3183370},
+    acmid = {3183370},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    keywords = {Deep learning, LSTM, document recommendation, quote recommendation},
+  } 
+  </pre>
+  </blockquote>
+  </div>
+  <font size="-1">[<a href="javascript:copy(div0, bib0)">bib</a>] [<a href="https://dl.acm.org/citation.cfm?id=3183370">paper</a>] </font>
+  <div id="div0"></div>
+
+</ul>
+
+
+<a name = "experience" class="disabled"><h2>Experience </h2></a>
+<ul>
+  <li><p><b>Research Assistant</b> <br> 2019.09 - present: Text Analytics and Machine Learning Lab (TAML), Queen's University <br> Supervised by <a href="http://www.xiaodanzhu.com">Prof. Xiaodan Zhu</a></p></li>
+  <li><p><b>Research Assistant</b> <br> 2018.11 - 2019.05: <a href="http://lit.eecs.umich.edu/">Language and Information Technologies Group, University of Michigan</a> <br> Supervised by <a href="https://web.eecs.umich.edu/~mihalcea/index.html">Prof. Rada Mihalcea</a></p></li>
+  <li><p><b>Research Intern</b> <br> 2018.07 - 2018.09: <a href="http://nlp.cs.ucsb.edu/">NLP Group, UC Santa Barbara</a> <br> Supervised by <a href="https://www.cs.ucsb.edu/~william/">Prof. William Wang</a></p></li>
+  <li><p><b>Research Intern</b> <br> 2018.01 - 2018.05: <a href="http://research.lenovo.com/webapp/view_English/index.html">Lenovo AI Lab, Beijing </a></p></li>
+  <!-- <li><p><b>Research Assistant</b> <br> 2016.10 - 2017.11: <a href="http://www.icst.pku.edu.cn/">Institute of Computer Science & Technology of Peking University</a> <br> Supervised by <a href="http://www.icst.pku.edu.cn/lcwm/wanxj/">Prof. Xiaojun Wan</a></p></li> -->
+  <li><p><b>Software Engineer Intern</b> <br> 2017.06 - 2017.08: <a href="https://bytedance.com/">ByteDance</a> NLP Group, Beijing</p></li>
+</ul>
+
+
+
+<a name = "misc" class="disabled"><h2> Miscellaneous </h2></a>
+<ul>
+  <li> My name is Hui, a Mandarin Chinese syllable. You may pronounce it as "/ˈhuːi/".</li>
+  <li> I come from <a href="https://en.wikipedia.org/wiki/Ji%27an" target="_blank">Ji'an, China</a>. </li>
+  <li> Wherever I am, I love photography. I list some of my favorite photos <a href="misc.html" target="_blank">here</a>. <br>You may also see some of the photos I take from <a href="https://500px.com/layneins" target="_blank">500px</a> or <a href="https://www.instagram.com/layneins/" target="_blank">instagram</a>.
+</ul>
+
+
+<p>
+  Last updated: <span id="datetime"></span>
+</p>
+<script type="text/javascript">
+  var dt = new Date();
+  document.getElementById("datetime").innerHTML = dt.toLocaleDateString();
+</script>
+<script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=Q6JhaLWKwQB7oicybQbb1rhknkAlYF--l9xvr_rlDjE&cl=ffffff&w=a"></script>
+
+</body>
+</html>
