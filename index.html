@@ -28,13 +28,13 @@ html *{
 .tab-links {
   display: flex;
   align-items: center;
-  gap: 15px; /* 控制标签之间的间距 */
+  gap: 15px; /* Distance between tabs */
   margin-bottom: 20px;
   font-size: 16px;
 }
 
 .separator {
-  font-weight: normal; /* 保持分隔符的粗细适中 */
+  font-weight: normal; /* Keep separator weight normal */
   font-size: 16px;
   color: #000;
 }
@@ -69,7 +69,7 @@ function toggleSection(sectionId) {
   if (section) {
     const isCurrentlyVisible = section.style.display !== 'none';
     
-    // 检查是否有其他section是显示的
+    // Check if other sections are shown
     const otherSectionsVisible = allSections.some(id => {
       if (id !== sectionId) {
         const otherSection = document.getElementById(id);
@@ -78,7 +78,7 @@ function toggleSection(sectionId) {
       return false;
     });
     
-    // 先隐藏所有其他section
+    // Firstly hide all other sections
     allSections.forEach(id => {
       if (id !== sectionId) {
         const otherSection = document.getElementById(id);
@@ -88,8 +88,8 @@ function toggleSection(sectionId) {
       }
     });
     
-    // 如果当前section是显示的且没有其他section显示，则隐藏当前section
-    // 如果当前section是隐藏的，或者有其他section在显示，则显示当前section
+    // If current section is shown and no other sections are shown，then hide the current section
+    // If current section is hidden，or if there are other shown sections，then show the current section
     if (isCurrentlyVisible && !otherSectionsVisible) {
       section.style.display = 'none';
     } else {
@@ -113,7 +113,7 @@ function toggleAll() {
   });
 }
 
-// 页面加载时设置默认状态：显示所有内容（All状态）
+// Default Status: show all content
 window.addEventListener('DOMContentLoaded', function() {
   const sections = ['preprint-section', 'year-2025-section', 'year-2024-section', 'year-2023-and-before-section'];
   sections.forEach(id => {
