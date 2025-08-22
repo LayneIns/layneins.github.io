@@ -61,6 +61,68 @@ function copy(dest, source) {
   }
   dest.blur();
 }
+
+function toggleSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  const allSections = ['preprint-section', 'year-2025-section', 'year-2024-section', 'year-2023-and-before-section'];
+  
+  if (section) {
+    const isCurrentlyVisible = section.style.display !== 'none';
+    
+    // 检查是否有其他section是显示的
+    const otherSectionsVisible = allSections.some(id => {
+      if (id !== sectionId) {
+        const otherSection = document.getElementById(id);
+        return otherSection && otherSection.style.display !== 'none';
+      }
+      return false;
+    });
+    
+    // 先隐藏所有其他section
+    allSections.forEach(id => {
+      if (id !== sectionId) {
+        const otherSection = document.getElementById(id);
+        if (otherSection) {
+          otherSection.style.display = 'none';
+        }
+      }
+    });
+    
+    // 如果当前section是显示的且没有其他section显示，则隐藏当前section
+    // 如果当前section是隐藏的，或者有其他section在显示，则显示当前section
+    if (isCurrentlyVisible && !otherSectionsVisible) {
+      section.style.display = 'none';
+    } else {
+      section.style.display = 'block';
+    }
+  }
+}
+
+function toggleAll() {
+  const sections = ['preprint-section', 'year-2025-section', 'year-2024-section', 'year-2023-and-before-section'];
+  const allVisible = sections.every(id => {
+    const section = document.getElementById(id);
+    return section && section.style.display !== 'none';
+  });
+  
+  sections.forEach(id => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.style.display = allVisible ? 'none' : 'block';
+    }
+  });
+}
+
+// 页面加载时设置默认状态：显示所有内容（All状态）
+window.addEventListener('DOMContentLoaded', function() {
+  const sections = ['preprint-section', 'year-2025-section', 'year-2024-section', 'year-2023-and-before-section'];
+  sections.forEach(id => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.style.display = 'block';
+    }
+  });
+});
 </script>
 
 <head>
@@ -123,11 +185,12 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
   <!-- <div style="height:180px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" id="news-content"> -->
   <div style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" id="news-content">
     <ul>
+      <li><span style="color: blue">[2025.08]</span> Four papers accepted to EMNLP 2025! Thanks for our interns and collaborators!</li>
       <li><span style="color: blue">[2025.06]</span> We are releasing a preview of <a href="https://github.com/Wu-Zongyu/CharmBench" target="_blank">CharmBench</a>, a challenging reasoning and multimodal benchmark for large vision-language models. Please feel free to test your VLMs based on the preview and reach out to us for any suggestions and feedbacks!</li>
       <li><span style="color: blue">[2025.06]</span> Our paper "In-Context Personalized Alignment with Feedback History under Counterfactual Evaluation" is accepted to ICML 2025 Workshop on Models of Human Feedback for AI Alignment (MoFA)! Thanks for our intern and collaborators!</li>
       <li><span style="color: blue">[2025.05]</span> We have 5 papers accepted to ACL 2025! Thanks for our interns and collaborators!</li>
-      <li><span style="color: blue">[2025.05]</span> We will host a "<a href="https://kdd2025llm4ecommerce.github.io" target="_blank">Large Language Model for E-Commerce</a>" Workshop at KDD'25! We invite <a href="https://openreview.net/group?id=KDD.org/2025/Workshop/LLM4ECommerce" target="_blank">submissions</a> that contribute to advancing the state-of-the-art in LLMs for e-commerce.</li>
-      <li><span style="color: blue">[2025.05]</span> Our paper "Mitigating Heterogeneous Token Overfitting in LLM Knowledge Editing" is accepted to ICML 2025! Thanks for our intern and collaborators!</li>
+      <!-- <li><span style="color: blue">[2025.05]</span> We will host a "<a href="https://kdd2025llm4ecommerce.github.io" target="_blank">Large Language Model for E-Commerce</a>" Workshop at KDD'25! We invite <a href="https://openreview.net/group?id=KDD.org/2025/Workshop/LLM4ECommerce" target="_blank">submissions</a> that contribute to advancing the state-of-the-art in LLMs for e-commerce.</li> -->
+      <!-- <li><span style="color: blue">[2025.05]</span> Our paper "Mitigating Heterogeneous Token Overfitting in LLM Knowledge Editing" is accepted to ICML 2025! Thanks for our intern and collaborators!</li> -->
       <!-- <li><span style="color: blue">[2025.04]</span> Our paper "Examples as the Prompt: A Scalable Approach for Efficient LLM Adaptation in E-Commerce" is accepted to SIGIR 2025 SIRIP (Industry Track) track! </li> -->
       <!-- <li><span style="color: blue">[2025.01]</span> Two papers accepted to ICLR 2025! Thanks for our interns and collaborators!</li> -->
       <!-- <li><span style="color: blue">[2025.01]</span> Three papers accepted to NAACL 2025! Thanks for our interns and collaborators!</li> -->
@@ -213,59 +276,29 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
 
 <div class="tab-links">
 [
-  <a href="#preprint">Preprint</a>
+  <a href="javascript:void(0)" onclick="toggleAll()">All</a>
   <span class="separator">|</span>
-  <a href="#year-2025">2025</a>
+  <a href="javascript:void(0)" onclick="toggleSection('year-2025-section')">2025</a>
   <span class="separator">|</span>
-  <a href="#year-2024">2024</a>
+  <a href="javascript:void(0)" onclick="toggleSection('year-2024-section')">2024</a>
   <span class="separator">|</span>
-  <a href="#year-2023-and-before">2023 and before</a>
+  <a href="javascript:void(0)" onclick="toggleSection('year-2023-and-before-section')">2023 and before</a>
+  <span class="separator">|</span>
+  <a href="javascript:void(0)" onclick="toggleSection('preprint-section')">Preprint</a>
 ]
 </div>
 
 <ol>
-  <h3 id="preprint">Preprint</h3>
+  <div id="year-2025-section">
+  <h3 id="year-2025">2025</h3>
   <li>
     <b>
-      <a href="https://arxiv.org/abs/2506.02546" target="_blank">Attention Knows Whom to Trust: Attention-based Trust Management for LLM Multi-Agent Systems</a> 
+      <a href="https://arxiv.org/abs/2506.17265" target="_blank">Does Multimodal Large Language Model Truly Unlearn? Stealthy MLLM Unlearning Attack</a> 
     </b>
     <br>
-    Pengfei He, Zhenwei Dai, Xianfeng Tang, Yue Xing, <b>Hui Liu</b>, Jingying Zeng, Qiankun Peng, Shrivats Agrawal, Samarth Varshney, Suhang Wang, Jiliang Tang, Qi He
+    Xianren Zhang, <b>Hui Liu</b>, Delvin Ce Zhang, Xianfeng Tang, Qi He, Dongwon Lee, Suhang Wang
     <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2506.01245" target="_blank">Comprehensive Vulnerability Analysis is Necessary for Trustworthy LLM-MAS</a> 
-    </b>
-    <br>
-    Pengfei He, Yue Xing, Shen Dong, Juanhui Li, Zhenwei Dai, Xianfeng Tang, <b>Hui Liu</b>, Han Xu, Zhen Xiang, Charu C. Aggarwal, Hui Liu
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2506.00359" target="_blank">Keeping an Eye on LLM Unlearning: The Hidden Risk and Remedy</a> 
-    </b>
-    <br>
-    Jie Ren, Zhenwei Dai, Xianfeng Tang, Yue Xing, Shenglai Zeng, <b>Hui Liu</b>, Jingying Zeng, Qiankun Peng, Samarth Varshney, Suhang Wang, Qi He, Charu C Aggarwal, Hui Liu
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2505.18440" target="_blank">Efficient Long CoT Reasoning in Small Language Models</a> 
-    </b>
-    <br>
-    Zhaoyang Wang, Jinqi Jiang, Tian Qiu, <b>Hui Liu</b>, Xianfeng Tang, Huaxiu Yao
-    <br>
-    <i>Manuscript, 2025</i>
+    <i>EMNLP 2025, long paper</i>
   </li>
   <br>
 
@@ -276,40 +309,7 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <br>
     Jiankun Zhang, Shenglai Zeng, Jie Ren, Tianqi Zheng, <b>Hui Liu</b>, Xianfeng Tang, Hui Liu, Yi Chang
     <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2504.11468" target="_blank">SFT or RL? An Early Investigation into Training R1-Like Reasoning Large Vision-Language Models</a> 
-    </b>
-    <br>
-    Hardy Chen, Haoqin Tu, Fali Wang, <b>Hui Liu</b>, Xianfeng Tang, Xinya Du, Yuyin Zhou, Cihang Xie
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2504.08202" target="_blank">Harnessing the Unseen: The Hidden Influence of Intrinsic Knowledge in Long-Context Language Models</a> 
-    </b>
-    <br>
-    Yu Fu, Haz Sameen Shahgir, <b>Hui Liu</b>, Xianfeng Tang, Qi He, Yue Dong
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2504.00869" target="_blank">m1: Unleash the Potential of Test-Time Scaling for Medical Reasoning with Large Language Models</a> 
-    </b>
-    <br>
-    Xiaoke Huang, Juncheng Wu, <b>Hui Liu</b>, Xianfeng Tang, Yuyin Zhou
-    <br>
-    <i>Manuscript, 2025</i>
+    <i>EMNLP 2025, long paper</i>
   </li>
   <br>
 
@@ -320,29 +320,7 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <br>
     Haoqin Tu, Weitao Feng, Hardy Chen, <b>Hui Liu</b>, Xianfeng Tang, Cihang Xie
     <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2503.04830" target="_blank">Cite Before You Speak: Enhancing Context-Response Grounding in E-commerce Conversational LLM-Agents</a> 
-    </b>
-    <br>
-    Jingying Zeng<sup>*</sup>, <b>Hui Liu</b><sup>*</sup>, Zhenwei Dai<sup>*</sup>, Xianfeng Tang, Chen Luo, Samarth Varshney, Zhen Li, Qi He
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2502.18387" target="_blank">How Far are LLMs from Real Search? A Comprehensive Study on Efficiency, Completeness, and Inherent Capabilities</a> 
-    </b>
-    <br>
-    Minhua Lin, <b>Hui Liu</b>, Xianfeng Tang, Jingying Zeng, Zhenwei Dai, Chen Luo, Zheng Li, Xiang Zhang, Qi He, Suhang Wang
-    <br>
-    <i>Manuscript, 2025</i>
+    <i>EMNLP 2025, long paper</i>
   </li>
   <br>
 
@@ -353,22 +331,10 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <br>
     Yunzhe Qi, Jinjin Tian, Ruirui Li, Tianci Liu, Tianxin Wei, <b>Hui Liu</b>, Xianfeng Tang, Monica Xiao Cheng, Jingrui He
     <br>
-    <i>Manuscript, 2024</i>
+    <i>Findings of EMNLP 2025, long paper</i>
   </li>
   <br>
 
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2412.12767" target="_blank">A Survey of Calibration Process for Black-Box LLMs</a> 
-    </b>
-    <br>
-    Liangru Xie, <b>Hui Liu</b>, Jingying Zeng, Xianfeng Tang, Yan Han, Chen Luo, Jing Huang, Zhen Li, Suhang Wang, Qi He
-    <br>
-    <i>Manuscript, 2024</i>
-  </li>
-
-<!-- (<sup>*</sup>: equal contribution) -->
-  <h3 id="year-2025">2025</h3>
   <li>
     <b>
       <a href="" target="_self">In-Context Personalized Alignment with Feedback History under Counterfactual Evaluation</a> 
@@ -514,7 +480,9 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <br>
     <i>Findings of NAACL 2025, long paper</i>
   </li>
+  </div>
 
+  <div id="year-2024-section">
   <h3 id="year-2024">2024</h3>
   <li>
     <b>
@@ -525,7 +493,9 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <br>
     <i>IEEE BigData'24, full paper</i>
   </li>
+  </div>
 
+  <div id="year-2023-and-before-section">
   <h3 id="year-2023-and-before">2023 and before</h3>
   <li>
     <b>
@@ -721,6 +691,152 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
   </blockquote>
   </div> -->
   <!-- <div id="div0"></div> -->
+  </div>
+
+  <div id="preprint-section">
+  <h3 id="preprint">Preprint</h3>
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2508.00890" target="_blank">AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks</a> 
+    </b>
+    <br>
+    Fali Wang, <b>Hui Liu</b>, Zhenwei Dai, Jingying Zeng, Zhiwei Zhang, Zongyu Wu, Chen Luo, Zhen Li, Xianfeng Tang, Qi He, Suhang Wang
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2507.07375" target="_blank">Bradley-Terry and Multi-Objective Reward Modeling Are Complementary</a> 
+    </b>
+    <br>
+    Zhiwei Zhang, <b>Hui Liu</b>, Xiaomin Li, Zhenwei Dai, Jingying Zeng, Fali Wang, Minhua Lin, Ramraj Chandradevan, Zhen Li, Chen Luo, Xianfeng Tang, Qi He, Suhang Wang
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2508.02669" target="_blank">MedVLThinker: Simple Baselines for Multimodal Medical Reasoning</a> 
+    </b>
+    <br>
+    Xiaoke Huang, Juncheng Wu, <b>Hui Liu</b>, Xianfeng Tang, Yuyin Zhou
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2506.02546" target="_blank">Attention Knows Whom to Trust: Attention-based Trust Management for LLM Multi-Agent Systems</a> 
+    </b>
+    <br>
+    Pengfei He, Zhenwei Dai, Xianfeng Tang, Yue Xing, <b>Hui Liu</b>, Jingying Zeng, Qiankun Peng, Shrivats Agrawal, Samarth Varshney, Suhang Wang, Jiliang Tang, Qi He
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2506.01245" target="_blank">Comprehensive Vulnerability Analysis is Necessary for Trustworthy LLM-MAS</a> 
+    </b>
+    <br>
+    Pengfei He, Yue Xing, Shen Dong, Juanhui Li, Zhenwei Dai, Xianfeng Tang, <b>Hui Liu</b>, Han Xu, Zhen Xiang, Charu C. Aggarwal, Hui Liu
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2506.00359" target="_blank">Keeping an Eye on LLM Unlearning: The Hidden Risk and Remedy</a> 
+    </b>
+    <br>
+    Jie Ren, Zhenwei Dai, Xianfeng Tang, Yue Xing, Shenglai Zeng, <b>Hui Liu</b>, Jingying Zeng, Qiankun Peng, Samarth Varshney, Suhang Wang, Qi He, Charu C Aggarwal, Hui Liu
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2505.18440" target="_blank">Efficient Long CoT Reasoning in Small Language Models</a> 
+    </b>
+    <br>
+    Zhaoyang Wang, Jinqi Jiang, Tian Qiu, <b>Hui Liu</b>, Xianfeng Tang, Huaxiu Yao
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2504.11468" target="_blank">SFT or RL? An Early Investigation into Training R1-Like Reasoning Large Vision-Language Models</a> 
+    </b>
+    <br>
+    Hardy Chen, Haoqin Tu, Fali Wang, <b>Hui Liu</b>, Xianfeng Tang, Xinya Du, Yuyin Zhou, Cihang Xie
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2504.08202" target="_blank">Harnessing the Unseen: The Hidden Influence of Intrinsic Knowledge in Long-Context Language Models</a> 
+    </b>
+    <br>
+    Yu Fu, Haz Sameen Shahgir, <b>Hui Liu</b>, Xianfeng Tang, Qi He, Yue Dong
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2504.00869" target="_blank">m1: Unleash the Potential of Test-Time Scaling for Medical Reasoning with Large Language Models</a> 
+    </b>
+    <br>
+    Xiaoke Huang, Juncheng Wu, <b>Hui Liu</b>, Xianfeng Tang, Yuyin Zhou
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2503.04830" target="_blank">Cite Before You Speak: Enhancing Context-Response Grounding in E-commerce Conversational LLM-Agents</a> 
+    </b>
+    <br>
+    Jingying Zeng<sup>*</sup>, <b>Hui Liu</b><sup>*</sup>, Zhenwei Dai<sup>*</sup>, Xianfeng Tang, Chen Luo, Samarth Varshney, Zhen Li, Qi He
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2502.18387" target="_blank">How Far are LLMs from Real Search? A Comprehensive Study on Efficiency, Completeness, and Inherent Capabilities</a> 
+    </b>
+    <br>
+    Minhua Lin, <b>Hui Liu</b>, Xianfeng Tang, Jingying Zeng, Zhenwei Dai, Chen Luo, Zheng Li, Xiang Zhang, Qi He, Suhang Wang
+    <br>
+    <i>Manuscript, 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2412.12767" target="_blank">A Survey of Calibration Process for Black-Box LLMs</a> 
+    </b>
+    <br>
+    Liangru Xie, <b>Hui Liu</b>, Jingying Zeng, Xianfeng Tang, Yan Han, Chen Luo, Jing Huang, Zhen Li, Suhang Wang, Qi He
+    <br>
+    <i>Manuscript, 2024</i>
+  </li>
+  </div>
 
 </ol>
 
