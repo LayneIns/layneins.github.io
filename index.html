@@ -64,7 +64,7 @@ function copy(dest, source) {
 
 function toggleSection(sectionId) {
   const section = document.getElementById(sectionId);
-  const allSections = ['preprint-section', 'year-2025-section', 'year-2024-section', 'year-2023-and-before-section'];
+  const allSections = ['preprint-section', 'year-2026-section', 'year-2025-section', 'year-2024-and-before-section'];
   
   if (section) {
     const isCurrentlyVisible = section.style.display !== 'none';
@@ -99,7 +99,7 @@ function toggleSection(sectionId) {
 }
 
 function toggleAll() {
-  const sections = ['preprint-section', 'year-2025-section', 'year-2024-section', 'year-2023-and-before-section'];
+  const sections = ['preprint-section', 'year-2026-section', 'year-2025-section', 'year-2024-and-before-section'];
   const allVisible = sections.every(id => {
     const section = document.getElementById(id);
     return section && section.style.display !== 'none';
@@ -115,7 +115,7 @@ function toggleAll() {
 
 // Default Status: show all content
 window.addEventListener('DOMContentLoaded', function() {
-  const sections = ['preprint-section', 'year-2025-section', 'year-2024-section', 'year-2023-and-before-section'];
+  const sections = ['preprint-section', 'year-2026-section', 'year-2025-section', 'year-2024-and-before-section'];
   sections.forEach(id => {
     const section = document.getElementById(id);
     if (section) {
@@ -185,11 +185,12 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
   <!-- <div style="height:180px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" id="news-content"> -->
   <div style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" id="news-content">
     <ul>
+      <li><span style="color: blue">[2025.11]</span> Our paper "Harnessing the Unseen: The Hidden Influence of Intrinsic Knowledge in Long-Context Language Models" is accept to AAAI 2026! </li>
       <li><span style="color: blue">[2025.10]</span> I will serve as a senior PC member at WWW 2026.</li>
       <li><span style="color: blue">[2025.10]</span> Our paper "SFT or RL? An Early Investigation into Training R1-Like Reasoning Large Vision-Language Models" is accept to TMLR! Please check out the paper <a href="https://arxiv.org/abs/2504.11468" target="_blank">here</a>.</li>
       <li><span style="color: blue">[2025.09]</span> Two papers, on agent test-time scaling and LLM unlearning, accepted to NeurIPS 2025! Thanks for our interns and collaborators!</li>
       <li><span style="color: blue">[2025.08]</span> Four papers accepted to EMNLP 2025! Thanks for our interns and collaborators!</li>
-      <li><span style="color: blue">[2025.06]</span> We are releasing a preview of <a href="https://github.com/Wu-Zongyu/CharmBench" target="_blank">CharmBench</a>, a challenging reasoning and multimodal benchmark for large vision-language models. Please feel free to test your VLMs based on the preview and reach out to us for any suggestions and feedbacks!</li>
+      <!-- <li><span style="color: blue">[2025.06]</span> We are releasing a preview of <a href="https://github.com/Wu-Zongyu/CharmBench" target="_blank">CharmBench</a>, a challenging reasoning and multimodal benchmark for large vision-language models. Please feel free to test your VLMs based on the preview and reach out to us for any suggestions and feedbacks!</li> -->
       <!-- <li><span style="color: blue">[2025.06]</span> Our paper "In-Context Personalized Alignment with Feedback History under Counterfactual Evaluation" is accepted to ICML 2025 Workshop on Models of Human Feedback for AI Alignment (MoFA)! Thanks for our intern and collaborators!</li> -->
       <!-- <li><span style="color: blue">[2025.05]</span> We have 5 papers accepted to ACL 2025! Thanks for our interns and collaborators!</li> -->
       <!-- <li><span style="color: blue">[2025.05]</span> We will host a "<a href="https://kdd2025llm4ecommerce.github.io" target="_blank">Large Language Model for E-Commerce</a>" Workshop at KDD'25! We invite <a href="https://openreview.net/group?id=KDD.org/2025/Workshop/LLM4ECommerce" target="_blank">submissions</a> that contribute to advancing the state-of-the-art in LLMs for e-commerce.</li> -->
@@ -284,17 +285,31 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
 [
   <a href="javascript:void(0)" onclick="toggleAll()">All</a>
   <span class="separator">|</span>
+  <a href="javascript:void(0)" onclick="toggleSection('year-2026-section')">2026</a>
+  <span class="separator">|</span>
   <a href="javascript:void(0)" onclick="toggleSection('year-2025-section')">2025</a>
   <span class="separator">|</span>
-  <a href="javascript:void(0)" onclick="toggleSection('year-2024-section')">2024</a>
-  <span class="separator">|</span>
-  <a href="javascript:void(0)" onclick="toggleSection('year-2023-and-before-section')">2023 and before</a>
+  <a href="javascript:void(0)" onclick="toggleSection('year-2024-and-before-section')">2024 and before</a>
   <span class="separator">|</span>
   <a href="javascript:void(0)" onclick="toggleSection('preprint-section')">Preprint</a>
 ]
 </div>
 
 <ol>
+  <div id="year-2026-section">
+  <h3 id="year-2026">2026</h3>
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2504.08202" target="_blank">Harnessing the Unseen: The Hidden Influence of Intrinsic Knowledge in Long-Context Language Models</a> 
+    </b>
+    <br>
+    Yu Fu, Haz Sameen Shahgir, <b>Hui Liu</b>, Xianfeng Tang, Qi He, Yue Dong
+    <br>
+    <i>AAAI 2026</i>
+  </li>
+  <!-- <br> -->
+  </div>
+
   <div id="year-2025-section">
   <h3 id="year-2025">2025</h3>
   <li>
@@ -327,6 +342,39 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     Jie Ren, Zhenwei Dai, Xianfeng Tang, Yue Xing, Shenglai Zeng, <b>Hui Liu</b>, Jingying Zeng, Qiankun Peng, Samarth Varshney, Suhang Wang, Qi He, Charu C Aggarwal, Hui Liu
     <br>
     <i>NeurIPS 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2505.18440" target="_blank">Efficient Long CoT Reasoning in Small Language Models</a> 
+    </b>
+    <br>
+    Zhaoyang Wang, Jinqi Jiang, Tian Qiu, <b>Hui Liu</b>, Xianfeng Tang, Huaxiu Yao
+    <br>
+    <i>NeurIPS 2025 Workshop on Efficient Reasoning</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2504.00869" target="_blank">m1: Unleash the Potential of Test-Time Scaling for Medical Reasoning with Large Language Models</a> 
+    </b>
+    <br>
+    Xiaoke Huang, Juncheng Wu, <b>Hui Liu</b>, Xianfeng Tang, Yuyin Zhou
+    <br>
+    <i>Machine Learning for Health Symposium (ML4H), 2025</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2508.02669" target="_blank">MedVLThinker: Simple Baselines for Multimodal Medical Reasoning</a> 
+    </b>
+    <br>
+    Xiaoke Huang, Juncheng Wu, <b>Hui Liu</b>, Xianfeng Tang, Yuyin Zhou
+    <br>
+    <i>Machine Learning for Health Symposium (ML4H), 2025</i>
   </li>
   <br>
 
@@ -521,8 +569,8 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
   </li>
   </div>
 
-  <div id="year-2024-section">
-  <h3 id="year-2024">2024</h3>
+  <div id="year-2024-and-before-section">
+  <h3 id="year-2024-and-before">2024 and before</h3>
   <li>
     <b>
       <a href="https://arxiv.org/abs/2408.02215" target="_blank">Exploring Query Understanding for Amazon Product Search</a> 
@@ -532,10 +580,8 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <br>
     <i>IEEE BigData'24, full paper</i>
   </li>
-  </div>
+  <br>
 
-  <div id="year-2023-and-before-section">
-  <h3 id="year-2023-and-before">2023 and before</h3>
   <li>
     <b>
       <a href="https://aclanthology.org/2023.findings-emnlp.542/" target="_blank">Knowledge-Selective Pretraining for Attribute Value Extraction</a> 
@@ -734,23 +780,15 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
 
   <div id="preprint-section">
   <h3 id="preprint">Preprint</h3>
+  <p>
+    **Please refer to my <a href="https://scholar.google.com/citations?user=brfcskMAAAAJ&hl=en" target="_blank"> Google Scholar Page</a> for a complete list.
+  </p>
   <li>
     <b>
       <a href="https://arxiv.org/abs/2507.07375" target="_blank">Bradley-Terry and Multi-Objective Reward Modeling Are Complementary</a> 
     </b>
     <br>
     Zhiwei Zhang, <b>Hui Liu</b>, Xiaomin Li, Zhenwei Dai, Jingying Zeng, Fali Wang, Minhua Lin, Ramraj Chandradevan, Zhen Li, Chen Luo, Xianfeng Tang, Qi He, Suhang Wang
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2508.02669" target="_blank">MedVLThinker: Simple Baselines for Multimodal Medical Reasoning</a> 
-    </b>
-    <br>
-    Xiaoke Huang, Juncheng Wu, <b>Hui Liu</b>, Xianfeng Tang, Yuyin Zhou
     <br>
     <i>Manuscript, 2025</i>
   </li>
@@ -773,39 +811,6 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     </b>
     <br>
     Pengfei He, Yue Xing, Shen Dong, Juanhui Li, Zhenwei Dai, Xianfeng Tang, <b>Hui Liu</b>, Han Xu, Zhen Xiang, Charu C. Aggarwal, Hui Liu
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2505.18440" target="_blank">Efficient Long CoT Reasoning in Small Language Models</a> 
-    </b>
-    <br>
-    Zhaoyang Wang, Jinqi Jiang, Tian Qiu, <b>Hui Liu</b>, Xianfeng Tang, Huaxiu Yao
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2504.08202" target="_blank">Harnessing the Unseen: The Hidden Influence of Intrinsic Knowledge in Long-Context Language Models</a> 
-    </b>
-    <br>
-    Yu Fu, Haz Sameen Shahgir, <b>Hui Liu</b>, Xianfeng Tang, Qi He, Yue Dong
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2504.00869" target="_blank">m1: Unleash the Potential of Test-Time Scaling for Medical Reasoning with Large Language Models</a> 
-    </b>
-    <br>
-    Xiaoke Huang, Juncheng Wu, <b>Hui Liu</b>, Xianfeng Tang, Yuyin Zhou
     <br>
     <i>Manuscript, 2025</i>
   </li>
