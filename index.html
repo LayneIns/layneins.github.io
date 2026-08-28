@@ -1,6 +1,19 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hui's Homepage</title>
+<link rel="icon" href="icons/lico.jpg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./icons/css/academicons.min.css"/>
+<script src="https://kit.fontawesome.com/3e1c7539c7.js" crossorigin="anonymous"></script>
+<meta name="author" content="Hui Liu">
+<meta name="keywords" content="Hui Liu">
+<meta name="robots" content="index,follow">
+<meta name="description" content="Homepage of Hui Liu.">
 
 <style>
 /*body {
@@ -19,24 +32,167 @@ a:hover {text-decoration:underline; color: #8C1515; }
   margin-right: auto;
 }
 html *{
-  font-family: Avenir
+  font-family: Avenir, "Avenir Next", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.bib-content {
-  font-family: STKaiti
+.bib-content, .zh {
+  font-family: STKaiti, "Kaiti SC", KaiTi, "Songti SC", SimSun, serif;
+}
+
+.profile-photo {
+  height: 250px;
+  width: auto;
+  max-width: 100%;
 }
 
 .tab-links {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 15px; /* Distance between tabs */
   margin-bottom: 20px;
   font-size: 16px;
+}
+
+.tab-links a.active {
+  font-weight: bold;
+  color: #8C1515;
+}
+
+/* Publication numbering runs continuously across the year sections.
+   Each section keeps its own <ol> so the markup stays valid, and a shared
+   CSS counter on the wrapper supplies the numbers. Sections hidden with
+   display:none generate no boxes, so filtering by year restarts at 1. */
+#publication-list {
+  counter-reset: pub;
+}
+.pub-list {
+  list-style: none;
+  padding-left: 2.6em;
+}
+.pub-list > li {
+  counter-increment: pub;
+  position: relative;
+}
+.pub-list > li::before {
+  content: counter(pub) ".";
+  position: absolute;
+  left: -2.6em;
+  width: 2.2em;
+  text-align: right;
 }
 
 .separator {
   font-weight: normal; /* Keep separator weight normal */
   font-size: 16px;
   color: #000;
+}
+
+/* Hover-to-open navigation menu, aligned to the right edge of the content
+   column (not the viewport). The wrapper mirrors the body's own sizing rules
+   (width: 80%; max-width: 800px; centered) so the button tracks the column at
+   any viewport width. It is click-through so the fixed strip never blocks the
+   text underneath; only .nav-inner takes pointer events.
+   Opens on hover (desktop), on keyboard focus, and on tap (touch devices,
+   handled by the .open class in the script below). */
+.nav-menu {
+  position: fixed;
+  top: 18px;
+  left: 0;
+  right: 0;
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: right;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.nav-inner {
+  position: relative;
+  display: inline-block;
+  text-align: left;
+  pointer-events: auto;
+}
+
+.nav-toggle {
+  display: block;
+  width: 40px;
+  height: 36px;
+  padding: 0;
+  font-size: 17px;
+  line-height: 34px;
+  text-align: center;
+  color: #333;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.nav-inner:hover .nav-toggle,
+.nav-inner:focus-within .nav-toggle,
+.nav-menu.open .nav-toggle {
+  color: #8C1515;
+  border-color: #c9c9c9;
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%; /* flush against the button so the pointer never crosses a gap */
+  right: 0;
+  min-width: 172px;
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  font-size: 15px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+.nav-inner:hover .nav-dropdown,
+.nav-inner:focus-within .nav-dropdown,
+.nav-menu.open .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-dropdown a {
+  display: block;
+  padding: 7px 16px;
+  white-space: nowrap;
+}
+
+.nav-dropdown a:hover {
+  background: #f4f4f4;
+  text-decoration: none;
+}
+
+/* Keep a heading off the very top edge when jumped to from the menu. */
+h2[id] {
+  scroll-margin-top: 24px;
+}
+
+@media (max-width: 600px) {
+  body.content { width: 92% !important; }
+  .header-table, .header-table tbody, .header-table tr, .header-table td {
+    display: block;
+    width: 100%;
+  }
+  .header-table td { padding: 8px 0 !important; }
+  .profile-photo { height: auto; width: 60%; }
+  /* Narrow screens: match the wider body and let the menu scroll away instead
+     of covering the right edge of the text, which it would overlap here. */
+  .nav-menu { position: absolute; top: 10px; width: 92%; }
 }
 
 </style>
@@ -62,104 +218,101 @@ function copy(dest, source) {
   dest.blur();
 }
 
-function toggleSection(sectionId) {
-  const section = document.getElementById(sectionId);
-  const allSections = ['preprint-section', 'year-2026-section', 'year-2025-section', 'year-2024-and-before-section'];
-  
-  if (section) {
-    const isCurrentlyVisible = section.style.display !== 'none';
-    
-    // Check if other sections are shown
-    const otherSectionsVisible = allSections.some(id => {
-      if (id !== sectionId) {
-        const otherSection = document.getElementById(id);
-        return otherSection && otherSection.style.display !== 'none';
-      }
-      return false;
-    });
-    
-    // Firstly hide all other sections
-    allSections.forEach(id => {
-      if (id !== sectionId) {
-        const otherSection = document.getElementById(id);
-        if (otherSection) {
-          otherSection.style.display = 'none';
-        }
-      }
-    });
-    
-    // If current section is shown and no other sections are shown，then hide the current section
-    // If current section is hidden，or if there are other shown sections，then show the current section
-    if (isCurrentlyVisible && !otherSectionsVisible) {
-      section.style.display = 'none';
-    } else {
-      section.style.display = 'block';
-    }
-  }
-}
+var PUB_SECTIONS = ['preprint-section', 'year-2026-section', 'year-2025-section', 'year-2024-and-before-section'];
 
-function toggleAll() {
-  const sections = ['preprint-section', 'year-2026-section', 'year-2025-section', 'year-2024-and-before-section'];
-  const allVisible = sections.every(id => {
-    const section = document.getElementById(id);
-    return section && section.style.display !== 'none';
-  });
-  
-  sections.forEach(id => {
-    const section = document.getElementById(id);
+// Show a single year section, or every section when passed 'all'.
+// Never leaves the publication list completely empty.
+function showSection(target) {
+  PUB_SECTIONS.forEach(function(id) {
+    var section = document.getElementById(id);
     if (section) {
-      section.style.display = allVisible ? 'none' : 'block';
+      section.style.display = (target === 'all' || id === target) ? 'block' : 'none';
+    }
+  });
+  var links = document.querySelectorAll('.tab-links a[data-target]');
+  Array.prototype.forEach.call(links, function(link) {
+    if (link.getAttribute('data-target') === target) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
     }
   });
 }
 
 // Default Status: show all content
 window.addEventListener('DOMContentLoaded', function() {
-  const sections = ['preprint-section', 'year-2026-section', 'year-2025-section', 'year-2024-and-before-section'];
-  sections.forEach(id => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.style.display = 'block';
+  showSection('all');
+});
+
+// Top-right navigation menu. Hover is handled in CSS; this adds tap support
+// for touch devices, plus outside-click and Escape to dismiss.
+window.addEventListener('DOMContentLoaded', function() {
+  var menu = document.getElementById('nav-menu');
+  if (!menu) return;
+  var toggle = menu.querySelector('.nav-toggle');
+
+  function setOpen(open) {
+    if (open) {
+      menu.classList.add('open');
+    } else {
+      menu.classList.remove('open');
     }
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  toggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    setOpen(!menu.classList.contains('open'));
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!menu.contains(e.target)) setOpen(false);
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') setOpen(false);
+  });
+
+  // Close after picking a destination.
+  menu.querySelectorAll('.nav-dropdown a').forEach(function(link) {
+    link.addEventListener('click', function() { setOpen(false); });
   });
 });
 </script>
 
-<head>
-    <title>Hui's Homepage</title>
-    <link rel="icon" href="icons/lico.jpg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./icons/css/academicons.min.css"/>
-    <script src="https://kit.fontawesome.com/3e1c7539c7.js" crossorigin="anonymous"></script>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="author" content="Hui Liu">
-    <meta name="keywords" content="Hui Liu">
-    <meta name="robots" content="index,follow">
-    <meta name="description" content="Homepage of Hui Liu.">
 </head>
 
 <body style="width:80%;" class="content">
 
-<table cellpadding="20" style="font-size: 17px">
+<nav id="nav-menu" class="nav-menu">
+  <div class="nav-inner">
+    <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Navigation menu">&#9776;</button>
+    <ul class="nav-dropdown">
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#services">Academic Services</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#proj">Projects</a></li>
+      <li><a href="#misc">Miscellaneous</a></li>
+    </ul>
+  </div>
+</nav>
+
+<table class="header-table" cellpadding="20" style="font-size: 17px">
 <tr>
-<td><img src='photo/img4.jpg' alt="Hui Liu"/, height = 250></td>
+<td><img class="profile-photo" src="photo/img4.jpg" alt="Hui Liu"></td>
 <td>
-<h1> Hui Liu <span style="font-family:STKaiti; font-size:18pt"> (刘晖)</span> </h1>
+<h1> Hui Liu <span class="zh" style="font-size:18pt"> (刘晖)</span> </h1>
 <!-- <font size="+1"><b>Ph.D. Candidate </b> in <b>Computer Science</b> <br><b>XXXX University</b> <br> <br> -->
 <b>Email</b>: <a href="mailto:&#104;&#117;&#105;&#108;&#105;&#117;&#108;&#97;&#121;&#110;&#101;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;"><tt>&#104;&#117;&#105;&#108;&#105;&#117;&#108;&#97;&#121;&#110;&#101;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</tt></a> <br>
 <!-- <b>Office</b>: XXXX</font> <br> -->
 <br>
-<!-- <a href = "#education">[Education]</a>  -->
-<a href = "#publications">[Publications]</a>
-<!-- <a href = "#experience">[Experience]</a> -->
-<!-- <a href = "#services">[Services]</a> -->
-<a href="#proj">[Projects]</a>
-<a href="#misc">[Miscellaneous]</a> <br> <br>
+<!-- Section navigation now lives in the hover menu at the top right. -->
 <!-- <a href="files/CV.pdf" title="CV"><i class="ai ai-cv-square ai-2x"></i></a> -->
 <a href="https://scholar.google.com/citations?user=brfcskMAAAAJ" title="Google Scholar" target="_blank"><i class="ai ai-google-scholar-square ai-2x"></i></a>
 <!-- <a href="https://twitter.com/layneliuhui" title="Twitter"><i class="fab fa-twitter-square ai-2x"></i></a> -->
 <!-- <a href="https://github.com/LayneIns" title="GitHub" target="_blank"><i class="fab fa-github-square ai-2x"></i></a> -->
-<a href="https://www.linkedin.com/in/hui-liu-702990155/" title="LinkedIn" target="_blank"><i class="fab fa-linkedin ai-2x"></i>
+<a href="https://www.linkedin.com/in/hui-liu-702990155/" title="LinkedIn" target="_blank"><i class="fab fa-linkedin ai-2x"></i></a>
 <!-- <a href="personalstatement/ps.mp4">[A vedio of personal statement]</a> -->
 </td>
 <!-- <td><img src='', height = 100></td> -->
@@ -168,7 +321,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- <a name = "about" class="disabled"><h2> About Me </h2></a> -->
-<h2> About Me </h2></a>
+<h2 id="about"> About Me </h2>
 <p>
   Hi! My name is Hui Liu. I am a Senior Applied Scientist at Amazon Ads. I obtained my Ph.D. degree from the <a href="https://www.ece.queensu.ca">Department of Electrical and Computer Engineering</a> at <a href="https://www.queensu.ca" target="_blank">Queen's University</a>. 
   <!-- My advisor is <a href="http://www.xiaodanzhu.com">Prof. Xiaodan Zhu</a>.  -->
@@ -181,7 +334,7 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
 <!-- <br><br> -->
       
 <!-- <a name = "news" class="disabled"><h2> News </h2></a> -->
-<h2 style="margin-top: 30px;"> News </h2></a>
+<h2 id="news" style="margin-top: 30px;"> News </h2>
 <p>
   <!-- <div style="height:180px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" id="news-content"> -->
   <div style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" id="news-content">
@@ -230,8 +383,11 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
   </div>
 </p>
 
-<!-- <a name = "experience" class="disabled"><h2>Experience </h2></a> -->
-<h2 style="margin-top: 30px;">Experience </h2></a>
+<!-- Experience section hidden. Split into two comment blocks because the
+     already-commented Michigan / UCSB entries below cannot be nested inside
+     an outer comment.
+
+<h2 id="experience" style="margin-top: 30px;">Experience </h2>
 <ul>
   <li>
     <p>
@@ -247,6 +403,7 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
       Applied Scientist Intern
     </p>
   </li>
+-->
   <!-- <li>
     <p>
       <b>2018.11 - 2019.05: <a href="http://lit.eecs.umich.edu/" target="_blank">Language and Information Technologies Group, University of Michigan</a></b>
@@ -257,10 +414,11 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
   <li>
     <p>
       <b>2018.07 - 2018.09: <a href="http://nlp.cs.ucsb.edu/" target="_blank">NLP Group, UC Santa Barbara</a></b>
-      <br> 
+      <br>
       Research Intern, with <a href="https://www.cs.ucsb.edu/~william/" target="_blank">Prof. William Wang</a>
     </p>
   </li> -->
+<!--
   <li>
     <p>
       <b>2018.01 - 2018.05: Lenovo AI Lab, Beijing </b>
@@ -269,17 +427,18 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     </p>
   </li>
 </ul>
+-->
 
-<h2 style="margin-top: 30px;">Academic Services </h2></a>
+<h2 id="services" style="margin-top: 30px;">Academic Services </h2>
 <ul>
   <li>
-    <b>Area Chair</b>: EMNLP (2024-2025), NAACL (2025), ACL (2025-2026), KDD (2026)
+    <b>Area Chair</b>: EMNLP (2024-2026), NAACL (2025), ACL (2025-2026), KDD (2026)
   </li>
   <li>
     <b>Senior Program Committee</b>: WWW (2026)
   </li>
   <li>
-    <b>Program Committee</b>: ACL (2022-2024), EMNLP (2021-2023), NAACL (2024), EACL (2023), ICLR (2022-2026), NeurIPS (2022-2025), ICML (2023-2026), COLM (2024-2026), AAAI (2022-2024), KDD (2025), CVPR (2026)
+    <b>Program Committee</b>: ACL (2022-2024), EMNLP (2021-2023), NAACL (2024), EACL (2023), ICLR (2022-2026), NeurIPS (2022-2025), ICML (2023-2026), COLM (2024-2026), AAAI (2022-2024, 2027), KDD (2025), CVPR (2026)
   </li>
   <li>
     I am also a regular Area Chair for <a href="https://aclrollingreview.org" target="_blank">ACL Rolling Review</a>.
@@ -287,29 +446,31 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
 </ul>
 
 
-<a name = "publications" class="disabled" style="color: inherit; text-decoration: none; pointer-events: none;"><h2 style="margin-top: 30px;"> Publication/Preprint</h2></a>
+<h2 id="publications" style="margin-top: 30px;"> Publication/Preprint</h2>
 
 <div class="tab-links">
 [
-  <a href="javascript:void(0)" onclick="toggleAll()">All</a>
+  <a href="javascript:void(0)" data-target="all" onclick="showSection('all')">All</a>
   <span class="separator">|</span>
-  <a href="javascript:void(0)" onclick="toggleSection('year-2026-section')">2026</a>
+  <a href="javascript:void(0)" data-target="year-2026-section" onclick="showSection('year-2026-section')">2026</a>
   <span class="separator">|</span>
-  <a href="javascript:void(0)" onclick="toggleSection('year-2025-section')">2025</a>
+  <a href="javascript:void(0)" data-target="year-2025-section" onclick="showSection('year-2025-section')">2025</a>
   <span class="separator">|</span>
-  <a href="javascript:void(0)" onclick="toggleSection('year-2024-and-before-section')">2024 and before</a>
+  <a href="javascript:void(0)" data-target="year-2024-and-before-section" onclick="showSection('year-2024-and-before-section')">2024 and before</a>
   <span class="separator">|</span>
-  <a href="javascript:void(0)" onclick="toggleSection('preprint-section')">Preprint</a>
+  <a href="javascript:void(0)" data-target="preprint-section" onclick="showSection('preprint-section')">Preprint</a>
 ]
 </div>
 
 <p>
-    **Please refer to my <a href="https://scholar.google.com/citations?user=brfcskMAAAAJ&hl=en" target="_blank"> Google Scholar Page</a> for a complete list.
+    Please refer to my <a href="https://scholar.google.com/citations?user=brfcskMAAAAJ&hl=en" target="_blank"> Google Scholar Page</a> for a complete list.
 </p>
 
-<ol>
-  <div id="year-2026-section">
-  <h3 id="year-2026">2026</h3>
+<div id="publication-list">
+
+<div id="year-2026-section">
+<h3 id="year-2026">2026</h3>
+<ol class="pub-list">
   <li>
     <b>
       <a href="https://openreview.net/forum?id=K5YOyNaVN0" target="_blank">Anchoring the Cache: Mitigating Contextual Hallucination in KV-Compressed Long-Context Summarization</a> 
@@ -444,7 +605,7 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
 
   <li>
     <b>
-      <a href="https://arxiv.org/abs/2510.04550" target="_blank">TRAJECT-Bench:A Trajectory-Aware Benchmark for Evaluating Agentic Tool Use</a> 
+      <a href="https://arxiv.org/abs/2510.04550" target="_blank">TRAJECT-Bench: A Trajectory-Aware Benchmark for Evaluating Agentic Tool Use</a> 
     </b>
     <br>
     Pengfei He, Zhenwei Dai, Bing He, <b>Hui Liu</b>, Xianfeng Tang, Hanqing Lu, Juanhui Li, Jiayuan Ding, Subhabrata Mukherjee, Suhang Wang, Yue Xing, Jiliang Tang, Benoit Dumoulin
@@ -485,10 +646,12 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <i>AAAI 2026</i>
   </li>
   <!-- <br> -->
+  </ol>
   </div>
 
   <div id="year-2025-section">
   <h3 id="year-2025">2025</h3>
+  <ol class="pub-list">
   <li>
     <b>
       <a href="https://arxiv.org/abs/2504.11468" target="_blank">SFT or RL? An Early Investigation into Training R1-Like Reasoning Large Vision-Language Models</a> 
@@ -601,7 +764,7 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
 
   <li>
     <b>
-      <a href="" target="_self">In-Context Personalized Alignment with Feedback History under Counterfactual Evaluation</a> 
+      <a href="https://openreview.net/forum?id=k7CXnlckfS" target="_blank">In-Context Personalized Alignment with Feedback History under Counterfactual Evaluation</a>
     </b>
     <br>
     Xisen Jin, Zheng Li, Zhenwei DAI, <b>Hui Liu</b>, Xianfeng Tang, Chen Luo, Rahul Goutam, Xiang Ren, Qi He
@@ -667,7 +830,7 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
 
   <li>
     <b>
-      <a href="#" target="_self">Mitigating Heterogeneous Token Overfitting in LLM Knowledge Editing</a> 
+      <a href="https://arxiv.org/abs/2502.00602" target="_blank">Mitigating Heterogeneous Token Overfitting in LLM Knowledge Editing</a>
     </b>
     <br>
     Tianci Liu, Ruirui Li, Zihan Dong, <b>Hui Liu</b>, Xianfeng Tang, Qingyu Yin, Linjun Zhang, Haoyu Wang, Jing Gao
@@ -695,11 +858,12 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     Zhiwei Zhang, Fali Wang, Xiaomin Li, Zongyu Wu, Xianfeng Tang, <b>Hui Liu</b>, Qi He, Wenpeng Yin, Suhang Wang
     <br>
     <i>ICLR 2025</i>
+    <br>
+    <font size="-1">
+      [<a href="https://github.com/zzwjames/FailureLLMUnlearning" target="_blank">code</a>]
+      [<a href="https://news.ycombinator.com/item?id=42037982" target="_blank">Hacker News</a>]
+    </font>
   </li>
-  <font size="-1">
-    [<a href="https://github.com/zzwjames/FailureLLMUnlearning" target="_blank">code</a>]
-    [<a href="https://news.ycombinator.com/item?id=42037982" target="_blank">Hacker News</a>]
-  </font>
   <br>
 
   <li>
@@ -744,10 +908,12 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <br>
     <i>Findings of NAACL 2025, long paper</i>
   </li>
+  </ol>
   </div>
 
   <div id="year-2024-and-before-section">
   <h3 id="year-2024-and-before">2024 and before</h3>
+  <ol class="pub-list">
   <li>
     <b>
       <a href="https://arxiv.org/abs/2408.02215" target="_blank">Exploring Query Understanding for Amazon Product Search</a> 
@@ -789,10 +955,11 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <b>Hui Liu</b>, Zhan Shi, Xiaodan Zhu
     <br>
     <i>EMNLP 2021 main conference, long paper</i>
+    <br>
+    <font size="-1">
+      [<a href="https://github.com/LayneIns/Unsupervised_dialo_disentanglement"  target="_blank">code</a>]
+    </font>
   </li>
-  <font size="-1">
-    [<a href="https://github.com/LayneIns/Unsupervised_dialo_disentanglement"  target="_blank">code</a>]
-  </font>
   <br>
 
   <li>
@@ -825,10 +992,11 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     Zhan Shi, <b>Hui Liu</b>, Xiaodan Zhu
     <br>
     <i>ACL-IJCNLP 2021 main conference, short paper</i>
+    <br>
+    <font size="-1">
+      [<a href="https://github.com/Gitsamshi/Nli-image-caption" target="_blank">code</a>]
+    </font>
   </li>
-  <font size="-1">
-    [<a href="https://github.com/Gitsamshi/Nli-image-caption" target="_blank">code</a>]
-  </font>
   <br>
 
   <li>
@@ -839,10 +1007,11 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     Jia-Chen Gu, <b>Hui Liu</b>, Zhen-Hua Ling, Quan Liu, Zhigang Chen, Xiaodan Zhu
     <br>
     <i>SIGIR 2021, full paper</i>
+    <br>
+    <font size="-1">
+      [<a href="https://github.com/JasonForJoy/Personalized-Response-Selection" target="_blank">code</a>]
+    </font>
   </li>
-  <font size="-1">
-    [<a href="https://github.com/JasonForJoy/Personalized-Response-Selection" target="_blank">code</a>]
-  </font>
   <br>
 
   <li>
@@ -853,10 +1022,11 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <b>Hui Liu</b>, Danqing Zhang, Bing Yin, Xiaodan Zhu
     <br>
     <i>NAACL-HLT 2021, long paper</i>
+    <br>
+    <font size="-1">
+      [<a href="https://github.com/LayneIns/Zero-shot-RLHR" target="_blank">code</a>]
+    </font>
   </li>
-  <font size="-1">
-    [<a href="https://github.com/LayneIns/Zero-shot-RLHR" target="_blank">code</a>]
-  </font>
   <br>
 
   <li>
@@ -867,10 +1037,11 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     Tianda Li, Jia-Chen Gu, <b>Hui Liu</b>, Quan Liu, Zhen-hua Ling, Zhiming Su, Xiaodan Zhu
     <br>
     <i>ICASSP 2021, full paper</i>
+    <br>
+    <font size="-1">
+      [<a href="https://github.com/TeddLi/UCM" target="_blank">code</a>]
+    </font>
   </li>
-  <font size="-1">
-    [<a href="https://github.com/TeddLi/UCM" target="_blank">code</a>]
-  </font>
   <br>
 
 
@@ -882,10 +1053,11 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <b>Hui Liu</b>, Zhan Shi, Jia-Chen Gu, Quan Liu, Si Wei, Xiaodan Zhu
     <br>
     <i>IJCAI 2020, full paper</i>
+    <br>
+    <font size="-1">
+      [<a href="https://github.com/LayneIns/E2E-dialo-disentanglement" target="_blank">code</a>]
+    </font>
   </li>
-  <font size="-1">
-    [<a href="https://github.com/LayneIns/E2E-dialo-disentanglement" target="_blank">code</a>]
-  </font>
   <br>
 
   <li>
@@ -896,7 +1068,12 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <b>Hui Liu</b>, Qingyu Yin, William Yang Wang 
     <br>
     <i>ACL 2019, long paper</i>
- </li>
+    <br>
+    <font size="-1">
+      <!-- [<a href="javascript:copy(div1, bib1)">bib</a>]  -->
+      [<a href="https://github.com/LayneIns/Generative-Explanation-Framework-for-Text-Classification" target="_blank">code</a>]
+    </font>
+  </li>
   <!-- <div id="bib1" style="display:none">
   <blockquote>
   <pre class="bib-content">
@@ -914,9 +1091,6 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
   </pre>
   </blockquote>
   </div> -->
-  <font size="-1">
-    <!-- [<a href="javascript:copy(div1, bib1)">bib</a>]  -->
-    [<a href="https://github.com/LayneIns/Generative-Explanation-Framework-for-Text-Classification" target="_blank">code</a>]</font>
   <!-- <div id="div1"></div> -->
   <br>
 
@@ -953,21 +1127,12 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
   </blockquote>
   </div> -->
   <!-- <div id="div0"></div> -->
+  </ol>
   </div>
 
   <div id="preprint-section">
   <h3 id="preprint">Preprint</h3>
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2506.02546" target="_blank">Attention Knows Whom to Trust: Attention-based Trust Management for LLM Multi-Agent Systems</a> 
-    </b>
-    <br>
-    Pengfei He, Zhenwei Dai, Xianfeng Tang, Yue Xing, <b>Hui Liu</b>, Jingying Zeng, Qiankun Peng, Shrivats Agrawal, Samarth Varshney, Suhang Wang, Jiliang Tang, Qi He
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
+  <ol class="pub-list">
   <li>
     <b>
       <a href="https://arxiv.org/abs/2506.01245" target="_blank">Comprehensive Vulnerability Analysis is Necessary for Trustworthy LLM-MAS</a> 
@@ -1010,22 +1175,23 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
     <br>
     <i>Manuscript, 2024</i>
   </li>
+  </ol>
   </div>
 
-</ol>
+</div>
 
-<a name="proj" class="disabled" style="color: inherit; text-decoration: none; pointer-events: none;"><h2 style="margin-top: 30px;"> Projects </h2></a>
+<h2 id="proj" style="margin-top: 30px;"> Projects </h2>
 <ul>
   <li><a href="https://github.com/LayneIns/Ask-Gemini-Extension" target="_blank">Ask Gemini</a>: A Chrome Extension that lets you ask for a specific text quote in Gemini's response.</li>
 </ul>
 
 
-<a name="misc" class="disabled" style="color: inherit; text-decoration: none; pointer-events: none;"><h2 style="margin-top: 30px;"> Miscellaneous </h2></a>
+<h2 id="misc" style="margin-top: 30px;"> Miscellaneous </h2>
 <!-- <h2> Miscellaneous </h2></a> -->
 <ul>
   <li> My name is Hui, a Mandarin Chinese syllable. You may pronounce it as "/ˈhuːei/".</li>
   <li> I was born in <a href="https://en.wikipedia.org/wiki/Ji%27an" target="_blank">Ji'an, China</a>, a city which has nurtured many notable people from the ancient. </li>
-  <li> I am a photographer, and I believe taking a good photo requires the same effort and attention to detail as conducting thorough research. If you're in the Bay Area and want to look great in a photo (or just want to discuss about research and AI), hit me up!
+  <li> I am a photographer, and I believe taking a good photo requires the same effort and attention to detail as conducting thorough research. If you're in the Bay Area and want to look great in a photo (or just want to discuss about research and AI), hit me up!</li>
 </ul>
 
 <img 
