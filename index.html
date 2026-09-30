@@ -58,6 +58,39 @@ html *{
   color: #8C1515;
 }
 
+.tab-links a.hide-publications {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding-left: 14px;
+  border-left: 1px solid #d7dce2;
+  color: #9a3740;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.hide-publications .fa {
+  width: 16px;
+  font-size: 14px;
+  text-align: center;
+}
+.tab-links a.hide-publications:hover,
+.tab-links a.hide-publications.active {
+  color: #721c24;
+}
+.hide-publications:hover span,
+.hide-publications.active span {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.hide-publications:focus-visible {
+  outline: 2px solid #9a3740;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
 /* Publication numbering runs continuously across the year sections.
    Each section keeps its own <ol> so the markup stays valid, and a shared
    CSS counter on the wrapper supplies the numbers. Sections hidden with
@@ -218,10 +251,9 @@ function copy(dest, source) {
   dest.blur();
 }
 
-var PUB_SECTIONS = ['preprint-section', 'year-2026-section', 'year-2025-section', 'year-2024-and-before-section'];
+var PUB_SECTIONS = ['year-2026-section', 'year-2025-section', 'year-2024-and-before-section'];
 
-// Show a single year section, or every section when passed 'all'.
-// Never leaves the publication list completely empty.
+// Show one year, all publications, or none when 'hide' is selected.
 function showSection(target) {
   PUB_SECTIONS.forEach(function(id) {
     var section = document.getElementById(id);
@@ -323,12 +355,12 @@ window.addEventListener('DOMContentLoaded', function() {
 <!-- <a name = "about" class="disabled"><h2> About Me </h2></a> -->
 <h2 id="about"> About Me </h2>
 <p>
-  Hi! My name is Hui Liu. I am a Senior Applied Scientist at Amazon Ads. I obtained my Ph.D. degree from the <a href="https://www.ece.queensu.ca">Department of Electrical and Computer Engineering</a> at <a href="https://www.queensu.ca" target="_blank">Queen's University</a>. 
+  Hi! My name is Hui Liu. I am a Senior Applied Scientist at Microsoft M365 Copilot. I obtained my Ph.D. degree from the <a href="https://www.ece.queensu.ca">Department of Electrical and Computer Engineering</a> at <a href="https://www.queensu.ca" target="_blank">Queen's University</a>. 
   <!-- My advisor is <a href="http://www.xiaodanzhu.com">Prof. Xiaodan Zhu</a>.  -->
   Prior to that, I received my B.S. from the <a href = "http://eecs.pku.edu.cn/" target="_blank">School of Electronics Engineering and Computer Science </a> at <a href = "http://www.pku.edu.cn" target="_blank"> Peking University</a> in 2018. <br>
 </p>
 
-Back in my third year of undergrad, when I was tinkering with SVMs for my first research project, I could never have imagined witnessing the shift in natural language processing from RNNs to Transformers. Now I feel fortunate to witness the impressive power of LLMs driving the new trends in NLP research. Recently, the question I think a lot is - <i>what is reasoning?</i> 
+I find it strange that we are teaching machines so much about the world, yet still expect them to wait for us to ask about it. Doing what we ask, faithfully, is a kind of honesty. But I keep wondering about the question no one thought to ask, the experiment no one assigned, and whether a machine might one day develop its own sense of what is beautiful and worth creating. Somewhere between honesty and beauty lies curiosity. That is the idea behind the personal intelligence I'm building: AI that comes to understand us, notices what we might have missed, and explores the world with us.
 
 <!-- <span style="color: red;">** We are hiring interns! If you are interested in working with us, please feel free to reach out or email me with your resume.</span> -->
 <!-- <br><br> -->
@@ -339,10 +371,13 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
   <!-- <div style="height:180px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" id="news-content"> -->
   <div style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" id="news-content">
     <ul>
+      <li><span style="color: blue">[2026.09]</span> Our survey "A Survey of Agentic Reasoning for Large Language Models: Towards Recursively Self-Improving and Collective Agents" is accepted to TMLR! Check out the paper <a href="https://arxiv.org/abs/2601.12538" target="_blank">here</a>.</li>
+      <li><span style="color: blue">[2026.09]</span> Three papers accepted to NeurIPS 2026 as posters! Thanks to our interns and collaborators!</li>
+      <li><span style="color: blue">[2026.08]</span> Two papers accepted to EMNLP 2026: one to the main conference and one to Findings! Thanks to our interns and collaborators!</li>
       <li><span style="color: blue">[2026.04]</span> Five papers accepted to ACL 2026! Thanks for our interns and collaborators!</li>
       <li><span style="color: blue">[2026.02]</span> Two papers on Visual Language Models accepted to ICML 2026! Thanks for our interns and collaborators!</li>
-      <li><span style="color: blue">[2026.02]</span> I build an "Ask Gemini" Chrome Extension that lets you ask for a specific text quote in Gemini's response. Check and try it out <a href="https://github.com/LayneIns/Ask-Gemini-Extension" target="_blank">here</a>!</li>
-      <li><span style="color: blue">[2026.02]</span> Our paper "When Token Pruning is Worse than Random: Understanding Visual Token Information in VLLMs" is accepted to CVPR 2026. Thanks for our collaborators!</li>
+      <!-- <li><span style="color: blue">[2026.02]</span> I build an "Ask Gemini" Chrome Extension that lets you ask for a specific text quote in Gemini's response. Check and try it out <a href="https://github.com/LayneIns/Ask-Gemini-Extension" target="_blank">here</a>!</li> -->
+      <!-- <li><span style="color: blue">[2026.02]</span> Our paper "When Token Pruning is Worse than Random: Understanding Visual Token Information in VLLMs" is accepted to CVPR 2026. Thanks for our collaborators!</li> -->
       <!-- <li><span style="color: blue">[2026.02]</span> I will serve as an Area Chair at KDD 2026.</li> -->
       <!-- <li><span style="color: blue">[2026.01]</span> Our summer interns’ work resulted in 6 papers accepted to ICLR 2026. Thanks for our interns and collaborators!</li> -->
       <!-- <li><span style="color: blue">[2026.01]</span> Our paper "DiffKGW: Stealthy and Robust Diffusion Model Watermarking" is accept to TMLR! Please check out the paper <a href="https://openreview.net/forum?id=OXi9vcIOgD" target="_blank">here</a>.</li> -->
@@ -446,7 +481,7 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
 </ul>
 
 
-<h2 id="publications" style="margin-top: 30px;"> Publication/Preprint</h2>
+<h2 id="publications" style="margin-top: 30px;"> Publications</h2>
 
 <div class="tab-links">
 [
@@ -457,8 +492,7 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
   <a href="javascript:void(0)" data-target="year-2025-section" onclick="showSection('year-2025-section')">2025</a>
   <span class="separator">|</span>
   <a href="javascript:void(0)" data-target="year-2024-and-before-section" onclick="showSection('year-2024-and-before-section')">2024 and before</a>
-  <span class="separator">|</span>
-  <a href="javascript:void(0)" data-target="preprint-section" onclick="showSection('preprint-section')">Preprint</a>
+  <a class="hide-publications" href="javascript:void(0)" data-target="hide" onclick="showSection('hide')" title="Hide publications"><i class="fa fa-eye-slash" aria-hidden="true"></i><span>Hide</span></a>
 ]
 </div>
 
@@ -473,21 +507,76 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
 <ol class="pub-list">
   <li>
     <b>
-      <a href="https://openreview.net/forum?id=K5YOyNaVN0" target="_blank">Anchoring the Cache: Mitigating Contextual Hallucination in KV-Compressed Long-Context Summarization</a> 
+      <a href="https://arxiv.org/abs/2601.12538" target="_blank">A Survey of Agentic Reasoning for Large Language Models: Towards Recursively Self-Improving and Collective Agents</a>
     </b>
     <br>
-    Yu Fu, Chen Luo, Josef Valvoda, Xin Zhang, Xuejing Lei, Xiao Pan, <b>Hui Liu</b>, Yue Dong 
+    Tianxin Wei, Ting-Wei Li, Zhining Liu, Xuying Ning, Ze Yang, Jiaru Zou, Zhichen Zeng, Ruizhong Qiu, Xiao Lin, Dongqi Fu, Zihao Li, Mengting Ai, Duo Zhou, Wenxuan Bao, Yunzhe Li, Gaotang Li, Cheng Qian, Yu Wang, Xiangru Tang, Yin Xiao, Liri Fang, <b>Hui Liu</b>, Xianfeng Tang, Yuji Zhang, Chi Wang, Jiaxuan You, Heng Ji, Hanghang Tong, Jingrui He
     <br>
-    <i>ACL 2026, long paper</i>
+    <i>Transactions on Machine Learning Research (TMLR), 2026</i>
   </li>
   <br>
 
   <li>
     <b>
-      <a href="https://arxiv.org/abs/2506.02546" target="_blank">To trust or not to trust: Attention-based Trust Management for LLM Multi-Agent Systems</a> 
+      <a href="https://arxiv.org/abs/2511.00086" target="_blank">Generalizing Test-time Compute-optimal Scaling as an Optimizable Graph</a>
+    </b>
+    <br>
+    Fali Wang, Jihai Chen, Shuhua Yang, Runxue Bao, Zhiwei Zhang, Tianxiang Zhao, <b>Hui Liu</b>, Xianfeng Tang, Qi He, Suhang Wang
+    <br>
+    <i>NeurIPS 2026, poster</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2506.02546" target="_blank">To trust or not to trust: Attention-based Trust Management for LLM Multi-Agent Systems</a>
     </b>
     <br>
     Pengfei He, Zhenwei Dai, Xianfeng Tang, Yue Xing, <b>Hui Liu</b>, Jingying Zeng, Qiankun Peng, Shrivats Agrawal, Samarth Varshney, Suhang Wang, Jiliang Tang, Qi He
+    <br>
+    <i>NeurIPS 2026, poster</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2605.17558" target="_blank">Firefly: Illuminating Verified Real-world Tool Call Data Generation</a>
+    </b>
+    <br>
+    Yuxuan Lu, Ziyi Wang, Yingzhou Lu, Yisi Sang, Jiri Gesi, Xianfeng Tang, Yimeng Zhang, Zhenwei Dai, <b>Hui Liu</b>, Hanqing Lu, Chen Luo, Qi He, Benoit Dumoulin, Jing Huang, Dakuo Wang
+    <br>
+    <i>NeurIPS 2026, poster</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2603.18718" target="_blank">MemMA: Coordinating the Memory Cycle through Multi-Agent Reasoning and In-Situ Self-Evolution</a>
+    </b>
+    <br>
+    Minhua Lin, Zhiwei Zhang, Hanqing Lu, <b>Hui Liu</b>, Xianfeng Tang, Qi He, Xiang Zhang, Suhang Wang
+    <br>
+    <i>EMNLP 2026 main conference</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://arxiv.org/abs/2606.01024" target="_blank">DSL-LLaDA: Scaling Continuous Denoising to 8B Masked Diffusion LMs</a>
+    </b>
+    <br>
+    Longxuan Yu, Yunshu Wu, Yu Fu, Siheng Xiong, Rob Brekelmans, <b>Hui Liu</b>, Yue Dong, Greg Ver Steeg
+    <br>
+    <i>Findings of EMNLP 2026</i>
+  </li>
+  <br>
+
+  <li>
+    <b>
+      <a href="https://openreview.net/forum?id=K5YOyNaVN0" target="_blank">Anchoring the Cache: Mitigating Contextual Hallucination in KV-Compressed Long-Context Summarization</a> 
+    </b>
+    <br>
+    Yu Fu, Chen Luo, Josef Valvoda, Xin Zhang, Xuejing Lei, Xiao Pan, <b>Hui Liu</b>, Yue Dong 
     <br>
     <i>ACL 2026, long paper</i>
   </li>
@@ -1127,54 +1216,6 @@ Back in my third year of undergrad, when I was tinkering with SVMs for my first 
   </blockquote>
   </div> -->
   <!-- <div id="div0"></div> -->
-  </ol>
-  </div>
-
-  <div id="preprint-section">
-  <h3 id="preprint">Preprint</h3>
-  <ol class="pub-list">
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2506.01245" target="_blank">Comprehensive Vulnerability Analysis is Necessary for Trustworthy LLM-MAS</a> 
-    </b>
-    <br>
-    Pengfei He, Yue Xing, Shen Dong, Juanhui Li, Zhenwei Dai, Xianfeng Tang, <b>Hui Liu</b>, Han Xu, Zhen Xiang, Charu C. Aggarwal, Hui Liu
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2503.04830" target="_blank">Cite Before You Speak: Enhancing Context-Response Grounding in E-commerce Conversational LLM-Agents</a> 
-    </b>
-    <br>
-    Jingying Zeng<sup>*</sup>, <b>Hui Liu</b><sup>*</sup>, Zhenwei Dai<sup>*</sup>, Xianfeng Tang, Chen Luo, Samarth Varshney, Zhen Li, Qi He
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2502.18387" target="_blank">How Far are LLMs from Real Search? A Comprehensive Study on Efficiency, Completeness, and Inherent Capabilities</a> 
-    </b>
-    <br>
-    Minhua Lin, <b>Hui Liu</b>, Xianfeng Tang, Jingying Zeng, Zhenwei Dai, Chen Luo, Zheng Li, Xiang Zhang, Qi He, Suhang Wang
-    <br>
-    <i>Manuscript, 2025</i>
-  </li>
-  <br>
-
-  <li>
-    <b>
-      <a href="https://arxiv.org/abs/2412.12767" target="_blank">A Survey of Calibration Process for Black-Box LLMs</a> 
-    </b>
-    <br>
-    Liangru Xie, <b>Hui Liu</b>, Jingying Zeng, Xianfeng Tang, Yan Han, Chen Luo, Jing Huang, Zhen Li, Suhang Wang, Qi He
-    <br>
-    <i>Manuscript, 2024</i>
-  </li>
   </ol>
   </div>
 
